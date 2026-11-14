@@ -1,5 +1,7 @@
 # DUKA One (Blauberg Vento Expert) for Home Assistant
 
+[![Validate](https://github.com/autimagic/ha-duka-one/actions/workflows/validate.yml/badge.svg)](https://github.com/autimagic/ha-duka-one/actions/workflows/validate.yml)
+
 Local control of single-room heat-recovery ventilation units built on the Blauberg Vento Expert platform, sold in Denmark as **DUKA One**. No cloud, no account: the integration talks to the unit over UDP on your own network using the documented Blauberg "Smart Home" protocol.
 
 ## Compatible units
