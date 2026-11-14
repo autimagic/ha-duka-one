@@ -1,0 +1,15 @@
+{
+  "domain": "duka_one",
+  "name": "DUKA One (Blauberg Vento Expert)",
+  "codeowners": [
+    "@autimagic"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/autimagic/ha-duka-one",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/autimagic/ha-duka-one/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

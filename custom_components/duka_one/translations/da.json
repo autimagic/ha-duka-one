@@ -1,0 +1,140 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DUKA One fundet på netværket",
+        "data": {
+          "device": "Enhed"
+        }
+      },
+      "credentials": {
+        "title": "Enhed {device_id} på {ip}",
+        "data": {
+          "password": "Enhedens adgangskode",
+          "name": "Navn"
+        }
+      },
+      "manual": {
+        "title": "Tilføj DUKA One manuelt",
+        "data": {
+          "ip_address": "IP-adresse",
+          "device_id": "Enheds-ID (16 tegn)",
+          "password": "Enhedens adgangskode",
+          "name": "Navn"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Intet svar fra enheden (UDP port 4000).",
+      "invalid_auth": "Enheden svarede, men afviste adgangskoden.",
+      "invalid_device_id": "Enheds-ID skal være 16 tegn."
+    },
+    "abort": {
+      "already_configured": "Enheden er allerede sat op."
+    }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "low": "Hastighed 1",
+              "medium": "Hastighed 2",
+              "high": "Hastighed 3",
+              "manual": "Manuel"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "ventilation_mode": {
+        "name": "Ventilationstilstand",
+        "state": {
+          "exhaust": "Udsugning",
+          "regeneration": "Regeneration (varmegenvinding)",
+          "supply": "Indblæsning"
+        }
+      },
+      "timer_mode": {
+        "name": "Timer",
+        "state": {
+          "off": "Fra",
+          "night": "Nat",
+          "party": "Party"
+        }
+      }
+    },
+    "number": {
+      "humidity_threshold": {
+        "name": "Fugtgrænse"
+      },
+      "boost_delay": {
+        "name": "Boost-efterløb"
+      },
+      "manual_speed": {
+        "name": "Manuel hastighed"
+      }
+    },
+    "switch": {
+      "humidity_sensor": {
+        "name": "Fugtsensor"
+      },
+      "relay_sensor": {
+        "name": "Relæindgang"
+      },
+      "analog_sensor": {
+        "name": "0-10 V-indgang"
+      },
+      "weekly_schedule": {
+        "name": "Ugeskema"
+      },
+      "cloud": {
+        "name": "Cloud-forbindelse"
+      }
+    },
+    "sensor": {
+      "humidity": {
+        "name": "Luftfugtighed"
+      },
+      "fan1_rpm": {
+        "name": "Aktuel hastighed, motor 1"
+      },
+      "fan2_rpm": {
+        "name": "Aktuel hastighed, motor 2"
+      },
+      "filter_days_left": {
+        "name": "Filter, dage tilbage"
+      },
+      "operating_time": {
+        "name": "Driftstid"
+      },
+      "timer_countdown": {
+        "name": "Timer, nedtælling"
+      },
+      "device_clock": {
+        "name": "Enhedens ur"
+      }
+    },
+    "binary_sensor": {
+      "filter_replacement": {
+        "name": "Filterskift"
+      },
+      "alarm": {
+        "name": "Alarm"
+      },
+      "boost_active": {
+        "name": "Boost"
+      }
+    },
+    "button": {
+      "reset_filter": {
+        "name": "Nulstil filtertæller"
+      },
+      "sync_clock": {
+        "name": "Synkronisér enhedens ur"
+      }
+    }
+  }
+}

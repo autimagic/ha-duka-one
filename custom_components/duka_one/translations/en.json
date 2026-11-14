@@ -1,0 +1,140 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DUKA One found on the network",
+        "data": {
+          "device": "Unit"
+        }
+      },
+      "credentials": {
+        "title": "Unit {device_id} at {ip}",
+        "data": {
+          "password": "Device password",
+          "name": "Name"
+        }
+      },
+      "manual": {
+        "title": "Add DUKA One manually",
+        "data": {
+          "ip_address": "IP address",
+          "device_id": "Device ID (16 characters)",
+          "password": "Device password",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No answer from the unit (UDP port 4000).",
+      "invalid_auth": "The unit answered but rejected the password.",
+      "invalid_device_id": "The device ID must be 16 characters."
+    },
+    "abort": {
+      "already_configured": "This unit is already configured."
+    }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "low": "Speed 1",
+              "medium": "Speed 2",
+              "high": "Speed 3",
+              "manual": "Manual"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "ventilation_mode": {
+        "name": "Ventilation mode",
+        "state": {
+          "exhaust": "Exhaust",
+          "regeneration": "Regeneration (heat recovery)",
+          "supply": "Supply"
+        }
+      },
+      "timer_mode": {
+        "name": "Timer mode",
+        "state": {
+          "off": "Off",
+          "night": "Night",
+          "party": "Party"
+        }
+      }
+    },
+    "number": {
+      "humidity_threshold": {
+        "name": "Humidity threshold"
+      },
+      "boost_delay": {
+        "name": "Boost run-on time"
+      },
+      "manual_speed": {
+        "name": "Manual speed"
+      }
+    },
+    "switch": {
+      "humidity_sensor": {
+        "name": "Humidity sensor"
+      },
+      "relay_sensor": {
+        "name": "Relay input"
+      },
+      "analog_sensor": {
+        "name": "0-10 V input"
+      },
+      "weekly_schedule": {
+        "name": "Weekly schedule"
+      },
+      "cloud": {
+        "name": "Cloud connection"
+      }
+    },
+    "sensor": {
+      "humidity": {
+        "name": "Humidity"
+      },
+      "fan1_rpm": {
+        "name": "Current fan 1 speed"
+      },
+      "fan2_rpm": {
+        "name": "Current fan 2 speed"
+      },
+      "filter_days_left": {
+        "name": "Filter days left"
+      },
+      "operating_time": {
+        "name": "Operating time"
+      },
+      "timer_countdown": {
+        "name": "Timer countdown"
+      },
+      "device_clock": {
+        "name": "Device clock"
+      }
+    },
+    "binary_sensor": {
+      "filter_replacement": {
+        "name": "Filter replacement"
+      },
+      "alarm": {
+        "name": "Alarm"
+      },
+      "boost_active": {
+        "name": "Boost"
+      }
+    },
+    "button": {
+      "reset_filter": {
+        "name": "Reset filter timer"
+      },
+      "sync_clock": {
+        "name": "Sync device clock"
+      }
+    }
+  }
+}
