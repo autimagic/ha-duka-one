@@ -75,6 +75,27 @@
       },
       "manual_speed": {
         "name": "Manuel hastighed"
+      },
+      "speed1_exhaust": {
+        "name": "Hastighed 1, udsugning"
+      },
+      "speed1_supply": {
+        "name": "Hastighed 1, indblæsning"
+      },
+      "speed2_exhaust": {
+        "name": "Hastighed 2, udsugning"
+      },
+      "speed2_supply": {
+        "name": "Hastighed 2, indblæsning"
+      },
+      "speed3_exhaust": {
+        "name": "Hastighed 3, udsugning"
+      },
+      "speed3_supply": {
+        "name": "Hastighed 3, indblæsning"
+      },
+      "filter_interval": {
+        "name": "Filterinterval"
       }
     },
     "switch": {

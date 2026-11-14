@@ -75,6 +75,27 @@
       },
       "manual_speed": {
         "name": "Manual speed"
+      },
+      "speed1_exhaust": {
+        "name": "Speed 1 exhaust"
+      },
+      "speed1_supply": {
+        "name": "Speed 1 supply"
+      },
+      "speed2_exhaust": {
+        "name": "Speed 2 exhaust"
+      },
+      "speed2_supply": {
+        "name": "Speed 2 supply"
+      },
+      "speed3_exhaust": {
+        "name": "Speed 3 exhaust"
+      },
+      "speed3_supply": {
+        "name": "Speed 3 supply"
+      },
+      "filter_interval": {
+        "name": "Filter interval"
       }
     },
     "switch": {

@@ -39,9 +39,17 @@ class P:
     ANALOG_SENSOR = 0x16
     HUMIDITY_THRESHOLD = 0x19  # 40..80 %
     HUMIDITY = 0x25
+    # Speed step settings, 0..255, two per step (found by probing DUKA One type 14/27, confirmed against the DUKA app)
+    SPEED1_EXHAUST = 0x3A
+    SPEED1_SUPPLY = 0x3B
+    SPEED2_EXHAUST = 0x3C
+    SPEED2_SUPPLY = 0x3D
+    SPEED3_EXHAUST = 0x3E
+    SPEED3_SUPPLY = 0x3F
     MANUAL_SPEED = 0x44  # 0..255
     FAN1_RPM = 0x4A
     FAN2_RPM = 0x4B
+    FILTER_INTERVAL = 0x63  # days, uint16 (DUKA app: 1..365)
     FILTER_COUNTDOWN = 0x64  # m, h, days(2)
     FILTER_RESET = 0x65
     BOOST_DELAY = 0x66  # 0..60 min
@@ -65,6 +73,7 @@ STATUS_PARAMS: tuple[int, ...] = (
     P.ON_OFF, P.SPEED, P.BOOST_ACTIVE, P.TIMER_MODE, P.TIMER_COUNTDOWN,
     P.HUMIDITY_SENSOR, P.RELAY_SENSOR, P.ANALOG_SENSOR, P.HUMIDITY_THRESHOLD,
     P.HUMIDITY, P.MANUAL_SPEED, P.FAN1_RPM, P.FAN2_RPM, P.FILTER_COUNTDOWN,
+    P.SPEED1_EXHAUST, P.SPEED1_SUPPLY, P.SPEED2_EXHAUST, P.SPEED2_SUPPLY, P.SPEED3_EXHAUST, P.SPEED3_SUPPLY, P.FILTER_INTERVAL,
     P.BOOST_DELAY, P.RTC_TIME, P.RTC_DATE, P.WEEKLY_SCHEDULE, P.MACHINE_HOURS,
     P.ALARM, P.CLOUD, P.FILTER_INDICATOR, P.WIFI_MODE, P.VENT_MODE,
 )
@@ -82,7 +91,7 @@ def decode(param: int, raw: bytes) -> Any:
     if param in (P.FILTER_COUNTDOWN, P.MACHINE_HOURS):
         days = u16(raw[2:4]) if len(raw) >= 4 else raw[2]
         return days * 1440 + raw[1] * 60 + raw[0]  # minutes
-    if param in (P.FAN1_RPM, P.FAN2_RPM, P.UNIT_TYPE):
+    if param in (P.FAN1_RPM, P.FAN2_RPM, P.UNIT_TYPE, P.FILTER_INTERVAL):
         return u16(raw)
     if param == P.RTC_TIME:
         return f"{raw[2]:02d}:{raw[1]:02d}:{raw[0]:02d}"

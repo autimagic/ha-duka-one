@@ -18,12 +18,14 @@ If your unit is not listed: try it, then open an issue with the model name and t
 
 | Entity | What it does |
 |---|---|
-| Fan | On/off, speed 1–3 as presets, percentage sets manual speed |
+| Fan | On/off, speed 1–3 as presets (percentage shows the step's configured value), setting a percentage switches to manual speed |
 | Select: Ventilation mode | Exhaust, regeneration (heat recovery), supply |
 | Select: Timer mode | Off, night, party |
 | Number: Humidity threshold | 40–80 % |
 | Number: Boost run-on time | 0–60 min |
 | Number: Manual speed | 0–255 |
+| Number: Speed 1–3 exhaust / supply | The value each speed step runs at, in % |
+| Number: Filter interval | 1–365 days |
 | Switch: Humidity sensor, relay input, 0-10 V input, weekly schedule, cloud | Enable/disable the unit's own automation inputs |
 | Sensor: Humidity, fan 1/2 rpm, filter days left, operating time, timer countdown, device clock | |
 | Binary sensor: Filter replacement, alarm, boost | |
@@ -39,7 +41,7 @@ Give each unit a fixed IP in your router.
 
 * The unit is polled every 30 seconds. Writes are confirmed by the unit and reflected immediately.
 * Factory reset, Wi-Fi settings and the device password are deliberately not exposed.
-* Weekly schedule contents and speed 1–3 percentages are not exposed yet.
+* Speed 1–3 values (exhaust and supply, in %) and the filter interval (days) are exposed as configuration numbers; they were found by probing DUKA One units and confirmed against the DUKA app, so they may differ on other models. Weekly schedule contents are not exposed yet.
 
 ## Protocol
 

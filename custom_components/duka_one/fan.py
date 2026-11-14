@@ -38,14 +38,17 @@ class DukaFan(DukaEntity, FanEntity):
 
     @property
     def percentage(self) -> int | None:
-        """Speed 1/2/3 show as 33/66/100 %; manual shows the actual manual speed."""
+        """Speed 1/2/3 show the step's configured value (supply value in supply mode); manual shows the manual speed."""
         if not self.is_on:
             return 0
         speed = self.param(P.SPEED)
         if speed in (1, 2, 3):
-            return (33, 66, 100)[speed - 1]
-        manual = self.param(P.MANUAL_SPEED)
-        return None if manual is None else round(manual * 100 / 255)
+            supply = self.param(P.VENT_MODE) == 2
+            key = {1: (P.SPEED1_EXHAUST, P.SPEED1_SUPPLY), 2: (P.SPEED2_EXHAUST, P.SPEED2_SUPPLY), 3: (P.SPEED3_EXHAUST, P.SPEED3_SUPPLY)}[speed][1 if supply else 0]
+            raw = self.param(key)
+        else:
+            raw = self.param(P.MANUAL_SPEED)
+        return None if raw is None else round(raw * 100 / 255)
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:
         if not self.is_on:
