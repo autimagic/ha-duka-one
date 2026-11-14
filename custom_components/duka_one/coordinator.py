@@ -8,6 +8,7 @@ from typing import Any
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_IP_ADDRESS, CONF_PASSWORD
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import CONF_DEVICE_ID, DOMAIN, SCAN_INTERVAL
@@ -33,14 +34,20 @@ class DukaCoordinator(DataUpdateCoordinator[dict[int, Any]]):
         self.info = resp.values
 
     async def _async_update_data(self) -> dict[int, Any]:
-        try:
-            if not self.info:
-                await self.async_read_info()
-            resp = await self.client.read(self.ip, self.device_id, self.password, STATUS_PARAMS)
-        except asyncio.TimeoutError as err:
-            raise UpdateFailed(f"No answer from {self.ip}") from err
-        except OSError as err:
-            raise UpdateFailed(f"UDP error to {self.ip}: {err}") from err
+        # The units occasionally drop a UDP datagram; one retry avoids a spurious "unavailable".
+        for attempt in range(2):
+            try:
+                if not self.info:
+                    await self.async_read_info()
+                resp = await self.client.read(self.ip, self.device_id, self.password, STATUS_PARAMS)
+                break
+            except asyncio.TimeoutError as err:
+                if attempt == 0:
+                    _LOGGER.debug("No answer from %s, retrying once", self.ip)
+                    continue
+                raise UpdateFailed(f"No answer from {self.ip}") from err
+            except OSError as err:
+                raise UpdateFailed(f"UDP error to {self.ip}: {err}") from err
         if resp.unsupported:
             self.unsupported |= resp.unsupported
         data = dict(self.data or {})
@@ -51,8 +58,11 @@ class DukaCoordinator(DataUpdateCoordinator[dict[int, Any]]):
         raw = bytes([value]) if isinstance(value, int) else value
         try:
             resp = await self.client.write(self.ip, self.device_id, self.password, param, raw)
-        except asyncio.TimeoutError as err:
-            raise UpdateFailed(f"No answer from {self.ip} after write") from err
+        except asyncio.TimeoutError:
+            try:
+                resp = await self.client.write(self.ip, self.device_id, self.password, param, raw)
+            except asyncio.TimeoutError as err:
+                raise HomeAssistantError(f"{self.ip} did not confirm the change") from err
         data = dict(self.data or {})
         data.update(resp.values)
         self.async_set_updated_data(data)
