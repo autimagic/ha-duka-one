@@ -41,7 +41,7 @@ Give each unit a fixed IP in your router.
 
 * The unit is polled every 30 seconds. Writes are confirmed by the unit and reflected immediately.
 * Factory reset, Wi-Fi settings and the device password are deliberately not exposed.
-* Speed 1–3 values (exhaust and supply, in %) and the filter interval (days) are exposed as configuration numbers; they were found by probing DUKA One units and confirmed against the DUKA app, so they may differ on other models. Weekly schedule contents are not exposed yet.
+* Speed 1–3 values (exhaust and supply, in %) and the filter interval (days) are exposed as configuration numbers; they were found by probing DUKA One units and confirmed against the DUKA app, so they may differ on other models. Writing the filter interval also restarts the unit's filter countdown (verified on a DUKA One type 27). Weekly schedule contents are not exposed yet.
 
 ## Protocol
 
