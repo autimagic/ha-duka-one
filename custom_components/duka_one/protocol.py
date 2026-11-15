@@ -233,8 +233,9 @@ class DukaClient:
         return await self.request(ip, device_id, password, FUNC_WRITEREAD, encode_write(param, value))
 
     async def write_noval(self, ip: str, device_id: str, password: str, param: int) -> Response:
-        """Parameters written without a value (filter reset)."""
-        return await self.request(ip, device_id, password, FUNC_WRITE, bytes([param]))
+        """Parameters written without a value (filter reset). FUNC_WRITE is never answered by the unit,
+        so use write+read, which the unit acknowledges with an empty response."""
+        return await self.request(ip, device_id, password, FUNC_WRITEREAD, bytes([param]))
 
     async def search(self, wait: float = 2.0) -> list[tuple[str, str]]:
         """Broadcast discovery. Returns [(device_id, ip), ...]."""
